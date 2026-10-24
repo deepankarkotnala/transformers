@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A step-by-step course on Transformers: the math and neural-network prerequisites, attention, the encoder–decoder architecture of Attention Is All You Need, training, generation and modern variants.">
-<meta name="theme-color" content="#ffffff"><title>Transformer Room</title>
+<meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"><title>Transformer Room</title>
 <script>(function(){try{var d=document.documentElement,r={};try{r=JSON.parse(localStorage.getItem("transformer-room.reading"))||{};}catch(e){}var dz=matchMedia("(max-width:860px)").matches?"m":"s";d.setAttribute("data-reading-size",["xs","s","m","l","xl"].indexOf(r.size)<0?dz:r.size);var f=false;try{f=JSON.parse(localStorage.getItem("transformer-room.focus"))===true;}catch(e){}var w=f?r.focusWidth:r.width;if(!f&&w==="full")w="wide";d.setAttribute("data-reading-width",["default","wide","full"].indexOf(w)<0?(f?"default":"wide"):w);d.setAttribute("data-reading-align",r.alignSet&&r.align==="justify"?"justify":"left");var t=null;try{t=localStorage.getItem("transformer-room-theme-v3");}catch(e){}d.setAttribute("data-theme",t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}})();</script>
 <style>
 :root{--paper:#faf9f5;--ink:#24352f;--muted:#626e67;--green:#185b4f;--pale:#eaf1eb;--line:#dce1d8;--white:#fffefa;--sand:#f3efe4;--radius:12px}
@@ -76,8 +76,8 @@ html[data-theme="dark"]{
   --shadow-card:none;
 }
 *{box-sizing:border-box}
-html{scrollbar-color:var(--line-strong) transparent}
-body{margin:0;background:var(--app-bg);color:var(--text);font:14.5px/1.62 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.006em}
+html{scrollbar-color:var(--line-strong) transparent;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--app-bg);color:var(--text);font:14.5px/1.62 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.006em;font-optical-sizing:auto}
 body,button,input,select{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 a{color:var(--accent)}
 button,input,select{color:inherit}
