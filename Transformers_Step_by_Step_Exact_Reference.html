@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A step-by-step course on Transformers: the math and neural-network prerequisites, attention, the encoder–decoder architecture of Attention Is All You Need, training, generation and modern variants.">
-<meta name="theme-color" content="#ffffff"><title>Transformer Room</title>
-<script>(function(){try{var d=document.documentElement,r={};try{r=JSON.parse(localStorage.getItem("transformer-room.reading"))||{};}catch(e){}var dz=matchMedia("(max-width:860px)").matches?"m":"s";d.setAttribute("data-reading-size",["xs","s","m","l","xl"].indexOf(r.size)<0?dz:r.size);var f=false;try{f=JSON.parse(localStorage.getItem("transformer-room.focus"))===true;}catch(e){}var w=f?r.focusWidth:r.width;if(!f&&w==="full")w="wide";d.setAttribute("data-reading-width",["default","wide","full"].indexOf(w)<0?(f?"default":"wide"):w);d.setAttribute("data-reading-align",r.alignSet&&r.align==="justify"?"justify":"left");var t=null;try{t=localStorage.getItem("transformer-room-theme-v3");}catch(e){}d.setAttribute("data-theme",t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}})();</script>
+<meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"><title>Learn Transformers</title>
+<script>(function(){try{var d=document.documentElement,r={};try{r=JSON.parse(localStorage.getItem("transformer-room.reading"))||{};}catch(e){}var dz="m";d.setAttribute("data-reading-size",["xs","s","m","l","xl"].indexOf(r.size)<0?dz:r.size);var f=false;try{f=JSON.parse(localStorage.getItem("transformer-room.focus"))===true;}catch(e){}var w=f?r.focusWidth:r.width;if(!f&&w==="full")w="wide";d.setAttribute("data-reading-width",["default","wide","full"].indexOf(w)<0?(f?"default":"wide"):w);d.setAttribute("data-reading-align",r.alignSet&&r.align==="justify"?"justify":"left");var t=null;try{t=localStorage.getItem("transformer-room-theme-v3");}catch(e){}d.setAttribute("data-theme",t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));try{var sw=localStorage.getItem("transformer-room.sidebar-w");if(sw&&+sw>=200&&+sw<=600){d.style.setProperty("--sidebar-w",sw+"px");d.style.setProperty("--sidebar-base",sw+"px");}}catch(e){}}catch(e){}})();</script>
 <style>
 :root{--paper:#faf9f5;--ink:#24352f;--muted:#626e67;--green:#185b4f;--pale:#eaf1eb;--line:#dce1d8;--white:#fffefa;--sand:#f3efe4;--radius:12px}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--green);text-underline-offset:4px}button,input,select{font:inherit}button,a,input,select,summary{touch-action:manipulation}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #b66b2b;outline-offset:4px}button:disabled{opacity:.45;cursor:default}.skip{position:fixed;top:-70px;left:10px;z-index:9;background:white;padding:12px}.skip:focus{top:10px}.layout{display:grid;grid-template-columns:266px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid var(--line);padding:30px 22px;background:#f1f3ec}.brand{display:flex;align-items:flex-start;gap:10px;text-decoration:none;color:var(--ink);font-weight:750;font-size:18px;line-height:1.35;letter-spacing:-.5px}.brand small{font-weight:450;font-size:12px;display:block;color:var(--muted);letter-spacing:.02em;margin-top:8px}.mark{display:inline-grid;place-items:center;width:31px;height:31px;background:var(--green);color:white;border-radius:50%;margin-bottom:0;flex-shrink:0;font-family:Georgia,serif}.nav-label,.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.15em;font-weight:750;color:var(--green)}.nav-label{margin:29px 10px 9px}.nav-link{display:flex;gap:11px;text-decoration:none;color:#4c5d52;border-radius:7px;padding:9px 10px;font-size:13px;align-items:center;line-height:1.4;margin:3px 0}.nav-link .num{font:11px ui-monospace,monospace;color:#617369;min-width:19px}.nav-link[aria-current="page"]{background:var(--green);color:white}.nav-link[aria-current="page"] .num{color:#d9e9de}.nav-link.done:not([aria-current="page"]) .num{color:var(--green);font-weight:bold}.progress-wrap{border-top:1px solid var(--line);margin-top:28px;padding:20px 10px 0;font-size:12px;color:var(--muted)}progress{display:block;width:100%;height:6px;border:0;margin:10px 0 8px;accent-color:var(--green)}progress::-webkit-progress-bar{background:#dbe3d8;border-radius:9px}progress::-webkit-progress-value{background:var(--green);border-radius:9px}.small-link{font-size:12px;display:inline-block;margin-top:14px}.main-wrap{min-width:0}.topbar{border-bottom:1px solid var(--line);padding:18px 7%;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.topbar span:last-child{color:var(--green)}main{max-width:890px;margin:0 auto;padding:54px 50px 30px;outline:none}h1,h2,h3{line-height:1.22;margin:0;color:var(--ink)}h1{font:normal 45px/1.12 Georgia,"Times New Roman",serif;letter-spacing:-1.3px;margin:13px 0 22px;max-width:690px}h2{font-size:21px;letter-spacing:-.4px;margin:32px 0 14px}h3{font-size:16px;margin:23px 0 10px}p{margin:13px 0}.lead{font-size:18px;line-height:1.65;color:#526258;max-width:640px}.subtle{color:var(--muted)}.small{font-size:13px}.hero-rule{width:55px;height:3px;background:var(--green);margin:27px 0}.button{border:1px solid var(--green);background:var(--green);color:white;border-radius:7px;padding:10px 17px;text-decoration:none;display:inline-block;font-size:14px;font-weight:600;line-height:1.5}.button.secondary{background:transparent;color:var(--green);border-color:#b9c9bd}.button.quiet{border-color:var(--line);background:var(--white);color:var(--ink)}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:24px 0}.callout{padding:14px 19px;background:var(--pale);border-radius:8px;margin:23px 0}.callout p{margin:4px 0}.callout.sand{background:var(--sand);border-color:#ae8543}.route{list-style:none;padding:0;margin:25px 0}.route li{border-top:1px solid var(--line)}.route li:last-child{border-bottom:1px solid var(--line)}.route a{display:grid;grid-template-columns:30px 1fr auto;gap:13px;align-items:center;padding:15px 0;text-decoration:none;color:var(--ink)}.route a:hover strong{text-decoration:underline;text-underline-offset:4px}.route .step{font-size:12px;color:var(--green);font-family:ui-monospace,monospace}.route strong{font-size:15px;display:block}.route small{font-size:12px;color:var(--muted);display:block;margin-top:1px}.route .arrow{color:var(--green);font-size:19px}.table-wrap{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#f0f3ed}td:first-child{font-weight:550}ul,ol{padding-left:23px}li{margin:8px 0}.formula{padding:18px 20px;background:#edf1ea;border:1px solid var(--line);border-radius:8px;font:15px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-x:auto;margin:19px 0}.formula.big{font-size:17px;text-align:center}.lab{border:1px solid #ccd9cc;background:var(--white);padding:23px;border-radius:var(--radius);margin:25px 0}.lab h3{margin:0 0 7px}.lab label{display:block;font-size:14px;font-weight:600;margin:15px 0 5px}input[type=range]{width:100%;accent-color:var(--green)}select{background:var(--paper);border:1px solid #b9c9bd;border-radius:6px;padding:7px 10px;max-width:100%;color:var(--ink)}.lab output{display:block;font:16px/1.8 ui-monospace,monospace;padding:15px;background:var(--pale);border-radius:6px;margin-top:15px}.lab .checkbox{display:flex;align-items:center;gap:8px;font-weight:450}.checkbox input{width:17px;height:17px;accent-color:var(--green)}.code-wrap{position:relative;margin:18px 0}pre{background:#21362f;color:#ecf2e8;padding:22px 20px;border-radius:8px;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto;margin:0}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em}p code,li code,td code{background:#eaf0e8;padding:2px 5px;border-radius:4px}pre code{font-size:inherit}.code-caption{font-size:12px;color:var(--muted);margin:7px 0}.copy{border:0;background:none;color:var(--green);font-size:12px;padding:6px 0;text-decoration:underline;text-underline-offset:3px}.checkpoint{margin:25px 0;padding:20px;border:1px solid var(--line);border-radius:9px;background:var(--white)}.checkpoint .eyebrow{margin-bottom:9px}details{border-top:1px solid var(--line);padding:13px 0;margin-top:12px}summary{cursor:pointer;color:var(--green);font-size:14px;font-weight:600}details p{font-size:14px}details details{border:0}.sources{margin-top:30px;font-size:12px;color:var(--muted)}.sources a{display:inline-block;margin:3px 12px 3px 0}.lesson-footer{border-top:1px solid var(--line);margin-top:32px;padding-top:22px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}.lesson-footer .nav-actions{display:flex;gap:9px}.site-footer{color:var(--muted);font-size:11px;padding:15px 0 32px;border-top:1px solid var(--line);margin-top:40px;display:flex;justify-content:space-between;gap:18px}.mini-path{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:20px 0}.mini-path span{background:var(--pale);border:1px solid var(--line);padding:7px 11px;font-size:13px;border-radius:6px}.architecture{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.tower{border:1px solid var(--line);border-radius:9px;padding:17px;background:var(--white)}.tower h3{margin:0 0 12px}.block{padding:11px 13px;background:var(--pale);border-radius:6px;font-size:13px;margin-top:9px;line-height:1.6}.block small{display:block;color:var(--muted);font-size:11px}.block.cross{background:var(--sand)}.tower .down{text-align:center;color:var(--green);font-size:16px;line-height:1.2;margin-top:8px}.meters{width:100%;height:8px;background:#e5eae1;border-radius:4px;margin-top:5px;overflow:hidden}.meters span{display:block;background:var(--green);height:100%;transition:width .18s}.lab td{font-size:13px;padding:10px 6px}.lab th{padding:8px 6px}.pill{display:inline-block;font-size:11px;color:var(--green);background:var(--pale);padding:3px 8px;border-radius:12px;margin-left:7px}.glossary dt{font-weight:650;font-size:14px;margin-top:14px}.glossary dd{font-size:14px;margin:3px 0 0;color:#536056}.noscript{padding:20px;background:var(--sand)}[hidden]{display:none!important}.print-only{display:none}
 @media(min-width:1300px){main{padding-top:65px}.topbar{padding-left:9%;padding-right:9%}}
-@media(max-width:800px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:16px;display:flex;align-items:center;gap:10px}.brand .mark{margin:0}.brand small{margin:2px 0 0}.nav-label{margin:18px 0 8px}nav{display:flex;gap:6px;overflow-x:auto;padding:3px 0 8px}nav .nav-link{flex-shrink:0;border:1px solid var(--line);padding:8px 10px}.progress-wrap{border:0;margin:10px 0 0;padding:0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.progress-wrap progress{width:90px;margin:0}.progress-wrap .small-link{margin:0 0 0 auto}.progress-wrap .progress-note{display:none}.topbar{padding:12px 24px}main{padding:32px 24px 20px}h1{font-size:37px}.lead{font-size:17px}.architecture{grid-template-columns:1fr}.site-footer{flex-direction:column;gap:5px}.lab{padding:17px}}
+@media(max-width:800px){.brand{font-size:16px;display:flex;align-items:center;gap:10px}.brand .mark{margin:0}.brand small{margin:2px 0 0}.nav-label{margin:18px 0 8px}.progress-wrap{border:0;margin:10px 0 0;padding:0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.progress-wrap progress{width:90px;margin:0}.progress-wrap .small-link{margin:0 0 0 auto}.progress-wrap .progress-note{display:none}.topbar{padding:12px 24px}main{padding:32px 24px 20px}h1{font-size:37px}.lead{font-size:17px}.architecture{grid-template-columns:1fr}.site-footer{flex-direction:column;gap:5px}.lab{padding:17px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 @media print{body{background:white;font-size:11pt}.layout{display:block}.sidebar,.topbar,.actions,.lesson-footer,.site-footer,.copy,.lab input,.lab select,.lab button,.lab label,.skip{display:none!important}main{max-width:none;padding:0}.page,.page[hidden]{display:block!important;break-before:page}.page:first-of-type{break-before:auto}.print-only{display:block}.lab,.checkpoint,pre,.tower{break-inside:avoid}h1{font-size:28pt}h2{font-size:16pt}a{color:inherit}pre{white-space:pre-wrap}details{display:block}details>*{content-visibility:visible}summary{list-style:none}.architecture{display:block}.tower{margin-bottom:12px}}
 
@@ -20,7 +20,7 @@
 .lab-result{background:var(--pale);border-radius:6px;padding:12px 14px;margin-top:15px;font:14px/1.8 ui-monospace,monospace}.check-label{display:flex!important;gap:10px;align-items:center}.check-label input{width:18px;height:18px;accent-color:var(--green)}
 .stack{margin:24px auto;max-width:580px;text-align:center}.stack div{padding:12px 18px;background:#eef2eb;border:1px solid var(--line);border-radius:7px;font-size:14px}.stack b{display:block;color:var(--green);line-height:1.5}.nav-label{margin-top:24px}.nav-group{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#6e7d71;margin:20px 9px 7px;font-weight:650}.nav-link{padding:8px 9px;font-size:12px}.sidebar{padding-top:24px}.progress-wrap{margin-top:20px}
 .read-count{font-size:12px;color:#6b796f;display:inline-block;margin:0 0 8px}h1{font-size:38px;letter-spacing:-1px;margin-bottom:18px}h2{font-size:21px;margin-top:30px}main{padding-top:40px}table{font-size:13px}.footer-note{font-size:12px;color:#6b796f}.paper-link{margin-top:12px}.unit{margin-top:25px}.unit h2{font-size:19px}.route a{padding:12px 0}.route small{font-size:13px}.sequence-note{font-size:14px;color:#5c6f61}.topbar{font-size:11px}.site-footer{margin-top:34px}.source-list{font-size:14px}.source-list li{margin:13px 0}
-@media(max-width:800px){.nav-group{display:none}h1{font-size:31px}.sidebar{padding:16px 20px}.sidebar .progress-note{display:none}.sidebar .brand{font-size:15px}.nav-label{margin-top:12px}main{padding:26px 21px}.opening{font-size:17px}.nav-link{font-size:12px}.equation{font-size:12px}.topbar{padding:12px 21px}.lab{padding:15px}}
+@media(max-width:800px){h1{font-size:31px}.sidebar .progress-note{display:none}.nav-label{margin-top:12px}main{padding:26px 21px}.opening{font-size:17px}.equation{font-size:12px}.topbar{padding:12px 21px}.lab{padding:15px}}
 @media print{.page,.page[hidden]{display:block!important}.optional:not([open]){display:none}.read-count{display:none}.nav-group{display:none}.goal{border-bottom:1px solid #aaa}main{padding:0}h1{font-size:25pt}.opening{font-size:12pt}.site-footer{display:none!important}}
 
 /* ===== Exact reference-design pass ======================================= */
@@ -76,14 +76,25 @@ html[data-theme="dark"]{
   --shadow-card:none;
 }
 *{box-sizing:border-box}
-html{scrollbar-color:var(--line-strong) transparent}
-body{margin:0;background:var(--app-bg);color:var(--text);font:14.5px/1.62 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.006em}
+html{scrollbar-color:var(--line-strong) transparent;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--app-bg);color:var(--text);font:14.5px/1.62 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.006em;font-optical-sizing:auto}
 body,button,input,select{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 a{color:var(--accent)}
 button,input,select{color:inherit}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px}
 .layout{display:grid;grid-template-columns:var(--sidebar-w) minmax(0,1fr);min-height:100vh;background:var(--app-bg)}
-.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:16px 16px 24px;border-right:1px solid var(--line);background:var(--sidebar-bg);scrollbar-width:thin;z-index:40}
+.sidebar{grid-column:1;grid-row:1;position:sticky;top:0;height:100vh;overflow-y:auto;padding:16px 16px 24px;border-right:1px solid var(--line);background:var(--sidebar-bg);scrollbar-width:thin;z-index:40}
+.sidebar-resizer{grid-column:1;grid-row:1;justify-self:end;position:sticky;top:0;height:100vh;width:10px;margin-right:-5px;z-index:50;cursor:col-resize;touch-action:none;user-select:none;-webkit-user-select:none;display:flex;align-items:center;justify-content:center;outline:none}
+.sidebar-resizer::after{content:"";width:2px;height:100%;background:transparent;transition:background-color .15s ease,width .15s ease}
+.sidebar-resizer:hover::after,.sidebar-resizer.is-resizing::after,.sidebar-resizer:focus-visible::after{background:var(--accent);width:3px}
+body.is-resizing{cursor:col-resize!important;user-select:none!important;-webkit-user-select:none!important}
+body.is-resizing *{cursor:col-resize!important;user-select:none!important;-webkit-user-select:none!important}
+body.nav-collapsed .sidebar-resizer,body.focus-mode .sidebar-resizer{display:none!important}
+.sidebar-scrim{display:none;position:fixed;inset:0;background:rgba(10,15,29,.46);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);z-index:65;opacity:0;transition:opacity .2s ease,visibility .2s ease;visibility:hidden}
+.sidebar-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sidebar-close{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;min-width:32px;min-height:32px;color:var(--muted);cursor:pointer;place-items:center;padding:0}
+.sidebar-close:hover{background:var(--surface-hover);color:var(--heading);border-color:var(--line-strong)}
+.sidebar-close svg{width:16px;height:16px}
 .brand{display:flex;align-items:center;gap:11px;padding:2px 1px 10px;color:var(--heading);font-size:13.5px;font-weight:720;letter-spacing:-.015em;text-decoration:none;line-height:1.25}
 .brand small{display:block;margin-top:3px;color:var(--muted);font-size:11px;font-weight:450;letter-spacing:0}
 .mark{display:grid;place-items:center;width:31px;height:31px;flex:0 0 31px;border-radius:7px;background:var(--accent);color:#fff}
@@ -97,13 +108,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .nav-label{margin:0 10px 8px}
 .nav-group{margin:20px 11px 6px}
 nav{display:block;padding-bottom:8px}
-.nav-link{position:relative;display:flex;align-items:center;gap:10px;min-height:39px;margin:1px 0;padding:7px 10px 7px 42px;border:1px solid transparent;border-radius:10px;color:var(--text);font-size:12.5px;font-weight:470;line-height:1.25;text-decoration:none;transition:background .14s ease,border-color .14s ease,color .14s ease}
+.nav-link{display:flex;align-items:center;min-height:36px;margin:1px 0;padding:8px 12px;border:1px solid transparent;border-radius:8px;color:var(--text);font-size:13px;font-weight:480;line-height:1.35;text-decoration:none;transition:background .14s ease,border-color .14s ease,color .14s ease}
 .nav-link:hover{background:var(--surface-hover)}
-.nav-link .num{position:absolute;left:12px;display:grid;place-items:center;width:22px;height:22px;border:1px solid var(--line-strong);border-radius:50%;background:var(--sidebar-bg);color:var(--muted);font:680 9px/1 ui-monospace,SFMono-Regular,Consolas,monospace}
+.nav-link .num{display:none}
 .nav-link[aria-current="page"]{border-color:#b9c8ee;background:var(--accent-soft);color:var(--heading);font-weight:620}
 html[data-theme="dark"] .nav-link[aria-current="page"]{border-color:#365793}
-.nav-link[aria-current="page"] .num{border-color:var(--accent);color:var(--accent);background:transparent}
-.nav-link.done:not([aria-current="page"]) .num{border-color:color-mix(in srgb,var(--success) 55%,var(--line));color:var(--success);font-weight:800}
+.nav-link.done{color:var(--heading)}
+.nav-link.done::after{content:"✓";margin-left:auto;font-size:11px;font-weight:700;color:var(--success)}
 .progress-wrap{margin:16px 8px 0;padding:14px 2px 0;border-top:1px solid var(--line);color:var(--muted);font-size:10.5px}
 .progress-wrap progress{height:5px;margin:8px 0 5px;background:var(--surface-soft);accent-color:var(--accent)}
 .progress-wrap progress::-webkit-progress-bar{background:var(--surface-soft);border-radius:999px}.progress-wrap progress::-webkit-progress-value{background:var(--accent);border-radius:999px;transition:width .25s ease}
@@ -114,7 +125,7 @@ html[data-theme="dark"] .nav-link[aria-current="page"]{border-color:#365793}
 .icon-button,.toolbar-action{border:0;background:transparent;color:var(--text);border-radius:7px;transition:background .14s ease,color .14s ease}
 .icon-button:hover,.toolbar-action:hover{background:var(--surface-hover)}
 .icon-button{display:grid;place-items:center;width:32px;height:32px;padding:0;cursor:pointer}
-.icon-button svg{width:19px;height:19px}.toolbar-action{display:flex;align-items:center;gap:6px;height:34px;padding:0 9px;font-size:12px;font-weight:510;text-decoration:none;cursor:pointer}.toolbar-action svg{width:16px;height:16px}.toolbar-action .aa{font-family:Georgia,"Times New Roman",serif;font-size:17px;font-weight:700;letter-spacing:-.08em}.toolbar-action .aa span{font-size:11px;margin-left:3px;font-weight:700}
+.icon-button svg{width:19px;height:19px}.toolbar-action{display:flex;align-items:center;gap:6px;height:34px;padding:0 9px;font-size:12px;font-weight:510;text-decoration:none;cursor:pointer}.toolbar-action svg{width:16px;height:16px}.toolbar-action .aa{font-family:inherit;font-size:13.5px;font-weight:600;letter-spacing:-.02em}.toolbar-action .aa span{font-size:10.5px;margin-left:1px;font-weight:600}
 .crumbs{display:flex;align-items:center;gap:8px;min-width:0;color:var(--muted);font-size:12.5px}.crumbs span:first-child{color:var(--text)}.crumb-sep{color:var(--faint)}#crumb-current{overflow:hidden;max-width:48vw;text-overflow:ellipsis;white-space:nowrap}
 .sun-icon{display:none}html[data-theme="dark"] .moon-icon{display:none}html[data-theme="dark"] .sun-icon{display:block}
 main{max-width:none;margin:0;padding:45px clamp(54px,5vw,76px) 44px;outline:none;background:var(--app-bg)}
@@ -131,14 +142,40 @@ p{margin:11px 0}.opening{max-width:1100px;margin:0 0 17px;color:var(--muted);fon
 .equation,.formula,.lab-result{margin:18px 0;padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:var(--surface-soft);color:var(--heading);font:13px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace}.formula.big{font-size:15px}.code-wrap{margin:18px 0}pre{border:1px solid var(--line);border-radius:8px;background:var(--code-bg);color:var(--code-text);padding:18px 20px;font-size:12.5px}.copy{color:var(--accent);font-size:10.5px}
 .table-wrap{overflow:hidden;margin:18px 0;border:1px solid var(--line);border-radius:9px;background:var(--surface)}table{width:100%;border-collapse:collapse;background:var(--surface);font-size:12.5px}th,td{padding:11px 13px;border-bottom:1px solid var(--line)}th{background:var(--surface-soft);color:var(--muted);font-size:9.5px;letter-spacing:.07em}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:var(--surface-hover)}
 p code,li code,td code{background:var(--surface-soft);color:var(--heading);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
-#start .unit{margin-top:30px}#start .unit h2{margin-bottom:14px}.route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}.route li{border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:0 1px 2px rgba(17,35,74,.05);overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.route li:last-child{border-bottom:1px solid var(--line)}.route li:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(17,35,74,.11);border-color:var(--line-strong)}.route a{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:center;min-height:78px;padding:14px 16px;color:var(--text);text-decoration:none;transition:background .16s ease}.route a:hover{background:var(--surface-hover);text-decoration:none}.route a:hover strong{text-decoration:none}.route .step{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;color:var(--accent);font-size:9px}.route strong{font-size:13.5px;line-height:1.35}.route small{font-size:11.5px}.route .arrow{display:none}
+#start .unit{margin-top:30px}#start .unit h2{margin-bottom:14px}.route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}.route li{border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:0 1px 2px rgba(17,35,74,.05);overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.route li:last-child{border-bottom:1px solid var(--line)}.route li:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(17,35,74,.11);border-color:var(--line-strong)}.route a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;min-height:78px;padding:14px 16px;color:var(--text);text-decoration:none;transition:background .16s ease}.route a:hover{background:var(--surface-hover);text-decoration:none}.route a:hover strong{text-decoration:none}.route .step{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;padding:0 5px;border:1px solid var(--line-strong);border-radius:999px;color:var(--accent);font:700 9px/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,monospace;box-sizing:border-box}.route strong{font-size:13.5px;line-height:1.35}.route small{font-size:11.5px}.route .arrow{display:none}
 .stack{max-width:720px}.stack div,.tower{border:1px solid var(--line);border-radius:9px;background:var(--surface);box-shadow:var(--shadow-card)}.stack div{padding:12px 16px}.stack b{color:var(--accent)}.architecture{gap:16px}.tower{padding:18px}.block{border:1px solid var(--line);border-radius:7px;background:var(--surface-soft)}.block.cross{background:color-mix(in srgb,var(--warning) 6%,var(--surface))}.tower .down{color:var(--accent)}.meters{height:7px;background:var(--surface-soft)}.meters span{background:var(--accent)}
 .lesson-footer{margin-top:37px;padding-top:22px;border-top:1px solid var(--line)}.site-footer{margin-top:42px;padding-top:22px;border-top:1px solid var(--line);color:var(--faint);font-size:10px}
 body.focus-mode .layout{grid-template-columns:1fr}body.focus-mode .sidebar{display:none}body.focus-mode main{padding-left:max(70px,8vw);padding-right:max(70px,8vw)}body.focus-mode .page{max-width:1180px}body.large-text{font-size:15.75px}body.large-text .opening{font-size:16px}body.large-text h1{font-size:40px}
 body.nav-collapsed .layout{grid-template-columns:0 minmax(0,1fr)}body.nav-collapsed .sidebar{transform:translateX(-100%)}
 @keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 @media(max-width:1180px){:root{--sidebar-w:260px}.route{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding-left:46px;padding-right:46px}.topbar{padding-left:18px;padding-right:18px}}
-@media(max-width:820px){.layout{display:block}.sidebar{position:fixed;left:0;top:0;width:min(86vw,290px);z-index:70;transform:translateX(-100%);transition:transform .18s ease;box-shadow:12px 0 30px rgba(0,0,0,.12)}body.mobile-nav-open .sidebar{transform:none}.topbar{padding:0 12px}.crumbs{font-size:11.5px}.toolbar-action span:not(.aa){display:none}.toolbar-action{padding:0 7px}.topbar-actions{gap:0}main{padding:30px 22px 30px}.home-summary{grid-template-columns:1fr}.route{grid-template-columns:1fr}h1{font-size:31px}.opening{font-size:14.5px}.progress-wrap{display:block}.menu-button{display:grid}}
+@media(max-width:820px){
+  .layout{display:block}
+  .sidebar{position:fixed;left:0;top:0;width:min(86vw,310px);height:100vh;height:100dvh;z-index:70;transform:translateX(-100%);transition:transform .22s cubic-bezier(.16,1,.3,1);box-shadow:12px 0 32px rgba(15,23,42,.18);background:var(--sidebar-bg);padding:18px 16px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;border-right:1px solid var(--line)}
+  body.mobile-nav-open{overflow:hidden}
+  body.mobile-nav-open .sidebar{transform:none}
+  body.mobile-nav-open .sidebar-scrim{display:block;opacity:1;visibility:visible}
+  .sidebar-close{display:grid}
+  .sidebar-resizer{display:none!important}
+  .sidebar nav{display:block!important;overflow-x:visible!important;padding:4px 0 16px!important}
+  .sidebar nav .nav-link{display:flex!important;flex-shrink:1!important;border:0!important;width:100%!important;padding:9px 11px!important;margin:3px 0!important;font-size:13.5px!important}
+  .sidebar .nav-group{display:block!important;margin:18px 9px 6px!important}
+  .sidebar .brand{display:flex!important;align-items:flex-start!important}
+  .sidebar-search input{font-size:16px!important}
+  .topbar{padding:0 max(14px,env(safe-area-inset-left)) 0 max(14px,env(safe-area-inset-right));height:54px}
+  .menu-button{display:grid!important;width:38px;height:38px}
+  .topbar-left{gap:10px;min-width:0}
+  .crumbs{font-size:12px}
+  .toolbar-action span:not(.aa){display:none}
+  .toolbar-action{padding:0 8px;height:36px}
+  .topbar-actions{gap:2px}
+  main{padding:28px max(18px,env(safe-area-inset-right)) 36px max(18px,env(safe-area-inset-left))}
+  .home-summary{grid-template-columns:1fr}
+  .route{grid-template-columns:1fr}
+  h1{font-size:30px!important;line-height:1.15!important}
+  .opening{font-size:15px!important;line-height:1.6!important}
+  .progress-wrap{display:block!important}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sidebar,.topbar,.home-summary{display:none!important}.layout{display:block}main{padding:0;background:#fff}.page{max-width:none}.route{display:block}.route li{margin-bottom:10px}}
 
@@ -163,7 +200,7 @@ html[data-theme="dark"]{--viz-pos:#e66767;--viz-neg:#3987e5;--viz-mid:#383835}
 .lesson-meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:2px 0 16px}
 .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font-size:11px;line-height:1.5;text-decoration:none}
 a.chip{color:var(--heading)}a.chip:hover{background:var(--surface-hover)}
-.chip b{font:700 9.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent)}
+.chip b{display:none!important}
 .meta-label{color:var(--muted);font-size:11px;margin-left:4px}
 
 /* practice tasks */
@@ -258,7 +295,7 @@ svg a:hover .d-box,svg a:hover .d-attn,svg a:hover .d-ffn,svg a:hover .d-norm,sv
 .quiz{margin:20px 0}
 .quiz .q{margin:0 0 14px;padding:15px 18px;border:1px solid var(--line);border-radius:9px;background:var(--surface);box-shadow:var(--shadow-card)}
 .quiz legend{padding:0;font-weight:640;color:var(--heading);font-size:14px;line-height:1.45;float:left;width:100%;margin-bottom:8px}
-.quiz legend .qn{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border:1px solid var(--line-strong);border-radius:50%;font:700 10px ui-monospace,monospace;color:var(--accent);vertical-align:1px}
+.quiz legend .qn{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 4px;margin-right:8px;border:1px solid var(--line-strong);border-radius:999px;font:700 9.5px/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,monospace;color:var(--accent);vertical-align:1px;box-sizing:border-box}
 .quiz .opt{clear:both;display:flex;gap:9px;align-items:flex-start;margin:5px 0;padding:7px 10px;border:1px solid var(--line);border-radius:7px;font-size:13.5px;cursor:pointer;font-weight:450}
 .quiz .opt:hover{background:var(--surface-hover)}
 .quiz .opt input{margin-top:4px;accent-color:var(--accent)}
@@ -286,17 +323,19 @@ svg a:hover .d-box,svg a:hover .d-attn,svg a:hover .d-ffn,svg a:hover .d-norm,sv
 .part-block{margin:0 0 26px}
 .part-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 .part-head h2{margin:0;padding:0;border:0;font-size:17px}
-.part-letter{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--accent-soft);color:var(--accent);font:800 12px ui-monospace,monospace;align-self:center}
+.part-letter{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--accent-soft);color:var(--accent);font:800 12px/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,Monaco,Consolas,monospace;align-self:center}
 .part-desc{color:var(--muted);font-size:12.5px;flex:1 1 280px}
 .part-time{color:var(--faint);font-size:11px;white-space:nowrap}
-.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:9px;list-style:none;margin:0;padding:0}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));grid-auto-rows:82px;gap:9px;list-style:none;margin:0;padding:0}
 .lesson-grid li{margin:0}
-.lesson-card{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:center;min-height:58px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text);text-decoration:none;box-shadow:0 1px 2px rgba(17,35,74,.04);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.lesson-card{position:relative;display:flex;flex-direction:column;justify-content:center;height:82px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text);text-decoration:none;box-shadow:0 1px 2px rgba(17,35,74,.04);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;box-sizing:border-box}
 .lesson-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(17,35,74,.09);border-color:var(--line-strong)}
-.lesson-card .lc-code{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;color:var(--accent);font:700 9px ui-monospace,monospace}
-.lesson-card strong{display:block;font-size:12.5px;line-height:1.3;color:var(--heading)}
-.lesson-card small{display:block;font-size:11px;color:var(--muted);margin-top:1px}
-.lesson-card.done .lc-code{border-color:color-mix(in srgb,var(--success) 60%,var(--line));color:var(--success)}
+.lesson-card .lc-code{display:none!important}
+.lesson-card > span:not(.lc-code){display:flex;flex-direction:column;justify-content:space-between;height:100%;width:100%}
+.lesson-card strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;line-height:1.35;color:var(--heading)}
+.lesson-card small{display:block;font-size:11px;color:var(--muted);margin-top:auto}
+.lesson-card.done{border-color:color-mix(in srgb,var(--success) 45%,var(--line));background:var(--ok-tint)}
+.lesson-card.done::after{content:"✓";position:absolute;top:9px;right:11px;font-size:11px;font-weight:700;color:var(--success)}
 .lesson-card.check{background:var(--surface-soft)}
 
 /* glossary */
@@ -318,13 +357,29 @@ svg a:hover .d-box,svg a:hover .d-attn,svg a:hover .d-ffn,svg a:hover .d-norm,sv
 
 /* small screens */
 @media(max-width:900px){.stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}.how-row{grid-template-columns:1fr}.dot-lab{grid-template-columns:1fr}.dot-lab svg{max-width:300px}.mask-trio{grid-template-columns:1fr}#start .home-hero{flex-direction:column;align-items:flex-start}}
-@media(max-width:620px){.lab .row{grid-template-columns:1fr 54px}.lab .row label{grid-column:1/-1}.glossary{grid-template-columns:1fr}.glossary dt{border-bottom:0;padding-bottom:0}.bar-row{grid-template-columns:64px minmax(0,1fr) 54px}#start h1{font-size:32px}}
+@media(max-width:620px){
+  .lab .row{grid-template-columns:1fr 54px}.lab .row label{grid-column:1/-1}.glossary{grid-template-columns:1fr}.glossary dt{border-bottom:0;padding-bottom:0}.bar-row{grid-template-columns:64px minmax(0,1fr) 54px}#start h1{font-size:30px}
+  .crumbs span:first-child,.crumbs .crumb-sep{display:none}
+  #crumb-current{max-width:55vw;font-weight:600;color:var(--heading)}
+  .lesson-grid{grid-template-columns:1fr!important}
+  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px}
+  .stat b{font-size:20px}
+  .stat{padding:12px 14px}
+  #start .home-hero .actions{width:100%;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+  #start .home-hero .actions .button{text-align:center;justify-content:center}
+  .lesson-footer{flex-direction:column!important;align-items:stretch!important;gap:10px!important}
+  .lesson-footer button{width:100%!important;justify-content:center}
+  .lesson-footer .nav-actions{display:flex!important;width:100%!important;gap:8px!important}
+  .lesson-footer .nav-actions a{flex:1 1 50%!important;text-align:center!important;justify-content:center!important;padding:10px 8px!important}
+  .site-footer{flex-direction:column!important;gap:6px!important;text-align:center!important}
+  .formula,.equation,pre,.table-wrap,.heat{overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
 @media print{.quiz-actions,.lab .row,.lab .controls{display:none!important}.takeaways,.figure,.quiz .q{break-inside:avoid}}
 
 /* ===== Display panel + reading settings (ported from interview_prep/assets/portal.css) =====
    Settings live on <html> as data-reading-size / -width / -align, written before first paint.
    Text size is one multiplier: the reading pane zooms by it, the sidebar by half of it. */
-html{--reading-scale:1;--sb-scale:calc(1 + (var(--reading-scale) - 1) * .5);--sidebar-base:290px}
+html{--reading-scale:1.14;--sb-scale:calc(1 + (var(--reading-scale) - 1) * .5);--sidebar-base:290px}
 html[data-reading-size="xs"]{--reading-scale:.88}
 html[data-reading-size="s"]{--reading-scale:1}
 html[data-reading-size="m"]{--reading-scale:1.14}
@@ -364,8 +419,8 @@ body.focus-mode .crumbs,body.focus-mode .menu-button,body.focus-mode .toolbar-ac
 
 /* trigger */
 .reader-wrap{position:relative;display:inline-flex;flex:none}
-.reader-glyph{display:inline-flex;align-items:baseline;gap:1px;font-weight:700;font-size:15px;line-height:1;letter-spacing:-.01em;font-family:Georgia,"Times New Roman",serif}
-.reader-glyph i{font-size:11px;font-style:normal;font-weight:700}
+.reader-glyph{display:inline-flex;align-items:baseline;gap:1px;font-weight:600;font-size:13.5px;line-height:1;letter-spacing:-.02em;font-family:inherit}
+.reader-glyph i{font-size:10.5px;font-style:normal;font-weight:600}
 
 /* popover: fixed and a child of <body>, because the topbar's backdrop-filter would clip it */
 .reader-popover{position:fixed;top:60px;right:16px;z-index:120;width:min(360px,calc(100vw - 20px));padding:14px 15px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);box-shadow:0 18px 44px rgba(17,20,26,.18);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .16s ease,transform .16s ease,visibility .16s}
@@ -417,15 +472,19 @@ input[type=range],.check-label input,.checkbox input,.quiz .opt input{accent-col
 summary{color:var(--accent)}
 th{text-transform:none!important;letter-spacing:.01em!important;font-size:10.5px}
 
-</style></head><body><a class="skip" href="#main">Skip to lesson</a><div class="layout"><aside class="sidebar"><a class="brand" href="#start" aria-label="Transformer Room home">
+</style></head><body><a class="skip" href="#main">Skip to lesson</a>
+<div class="sidebar-scrim" id="sidebar-scrim" aria-hidden="true"></div>
+<div class="layout"><aside class="sidebar"><div class="sidebar-top"><a class="brand" href="#start" aria-label="Learn Transformers home">
 <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 9h8M8 12h6M8 15h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-<span>Transformer Room<small>From first principles · step by step</small></span></a>
+<span>Learn Transformers<small>From first principles · step by step</small></span></a>
+<button class="sidebar-close" id="sidebar-close" type="button" aria-label="Close navigation" title="Close navigation"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
 <div class="sidebar-search"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15 15 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><input id="lesson-search" type="search" placeholder="Search all lessons" aria-label="Search all lessons"></div>
 <div class="nav-label">LEARN</div><nav aria-label="Lessons"><a class="nav-link" href="#start" data-page="start" data-code="⌂"><span class="num">⌂</span>Roadmap</a><div class="nav-group">0 · Orientation</div><a class="nav-link" href="#overview" data-page="overview" data-code="0.1"><span class="num">0.1</span>The destination</a><a class="nav-link" href="#readiness" data-page="readiness" data-code="0.2"><span class="num">0.2</span>Readiness check</a><a class="nav-link" href="#glossary" data-page="glossary" data-code="0.3"><span class="num">0.3</span>Notation &amp; glossary</a><div class="nav-group">A · Math you&#x27;ll actually use</div><a class="nav-link" href="#dot" data-page="dot" data-code="A1"><span class="num">A1</span>Dot product as similarity</a><a class="nav-link" href="#matrices" data-page="matrices" data-code="A2"><span class="num">A2</span>Matrices, shapes and transpose</a><a class="nav-link" href="#softmax" data-page="softmax" data-code="A3"><span class="num">A3</span>Exponentials, logs and softmax</a><a class="nav-link" href="#derivatives" data-page="derivatives" data-code="A4"><span class="num">A4</span>Derivatives and the chain rule</a><a class="nav-link" href="#stats" data-page="stats" data-code="A5"><span class="num">A5</span>Mean, variance and normalization</a><div class="nav-group">B · Neural networks</div><a class="nav-link" href="#neuron" data-page="neuron" data-code="B1"><span class="num">B1</span>Neurons and layers</a><a class="nav-link" href="#loss" data-page="loss" data-code="B2"><span class="num">B2</span>Loss functions</a><a class="nav-link" href="#learning" data-page="learning" data-code="B3"><span class="num">B3</span>Gradient descent and backprop</a><a class="nav-link" href="#training" data-page="training" data-code="B4"><span class="num">B4</span>Training in practice</a><a class="nav-link" href="#check-b" data-page="check-b" data-code="B5"><span class="num">B5</span>Checkpoint B</a><div class="nav-group">C · Text and sequences</div><a class="nav-link" href="#tokens" data-page="tokens" data-code="C1"><span class="num">C1</span>Tokenization</a><a class="nav-link" href="#embeddings" data-page="embeddings" data-code="C2"><span class="num">C2</span>Embeddings</a><a class="nav-link" href="#rnn" data-page="rnn" data-code="C3"><span class="num">C3</span>RNNs and the bottleneck</a><a class="nav-link" href="#early-attention" data-page="early-attention" data-code="C4"><span class="num">C4</span>Attention before Transformers</a><a class="nav-link" href="#check-c" data-page="check-c" data-code="C5"><span class="num">C5</span>Checkpoint C</a><div class="nav-group">D · Attention, one piece at a time</div><a class="nav-link" href="#attention-idea" data-page="attention-idea" data-code="D1"><span class="num">D1</span>Attention as a weighted average</a><a class="nav-link" href="#scores" data-page="scores" data-code="D2"><span class="num">D2</span>Scores to weights, by hand</a><a class="nav-link" href="#qkv" data-page="qkv" data-code="D3"><span class="num">D3</span>Queries, keys and values</a><a class="nav-link" href="#matrix-form" data-page="matrix-form" data-code="D4"><span class="num">D4</span>Matrix form and the √dₖ scale</a><a class="nav-link" href="#heads" data-page="heads" data-code="D5"><span class="num">D5</span>Multi-head attention</a><a class="nav-link" href="#masks" data-page="masks" data-code="D6"><span class="num">D6</span>Padding and causal masks</a><a class="nav-link" href="#positions" data-page="positions" data-code="D7"><span class="num">D7</span>Positional encoding</a><a class="nav-link" href="#check-d" data-page="check-d" data-code="D8"><span class="num">D8</span>Checkpoint D</a><div class="nav-group">E · The Transformer</div><a class="nav-link" href="#sublayers" data-page="sublayers" data-code="E1"><span class="num">E1</span>Feed-forward, residuals, layer norm</a><a class="nav-link" href="#encoder" data-page="encoder" data-code="E2"><span class="num">E2</span>The encoder</a><a class="nav-link" href="#decoder" data-page="decoder" data-code="E3"><span class="num">E3</span>The decoder and cross-attention</a><a class="nav-link" href="#output" data-page="output" data-code="E4"><span class="num">E4</span>The output layer</a><a class="nav-link" href="#shapes" data-page="shapes" data-code="E5"><span class="num">E5</span>Full shape trace</a><a class="nav-link" href="#train-transformer" data-page="train-transformer" data-code="E6"><span class="num">E6</span>How it&#x27;s trained</a><a class="nav-link" href="#generation" data-page="generation" data-code="E7"><span class="num">E7</span>How it generates text</a><a class="nav-link" href="#paper" data-page="paper" data-code="E8"><span class="num">E8</span>Reading the paper</a><div class="nav-group">G · After the paper</div><a class="nav-link" href="#families" data-page="families" data-code="G1"><span class="num">G1</span>BERT, GPT and T5</a><a class="nav-link" href="#modern" data-page="modern" data-code="G2"><span class="num">G2</span>What modern models changed</a><a class="nav-link" href="#pretraining" data-page="pretraining" data-code="G3"><span class="num">G3</span>Pretraining and fine-tuning</a></nav>
 <div class="progress-wrap"><span id="progress-text">0 of 37 lessons understood</span><progress id="progress" max="37" value="0" aria-label="Lessons understood"></progress><div class="progress-note">Offline edition · theory first</div></div></aside>
+<div class="sidebar-resizer" id="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" tabindex="0" title="Drag to resize sidebar (double-click to reset)"></div>
 <div class="main-wrap"><header class="topbar">
 <div class="topbar-left"><button class="icon-button menu-button" id="menu-button" type="button" aria-label="Toggle navigation" title="Toggle navigation"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-<div class="crumbs"><span>Transformer Room</span><span class="crumb-sep">/</span><span id="crumb-current">Roadmap</span></div></div>
+<div class="crumbs"><span>Learn Transformers</span><span class="crumb-sep">/</span><span id="crumb-current">Roadmap</span></div></div>
 <div class="topbar-actions">
 <a class="toolbar-action home-action" href="#start"><svg viewBox="0 0 24 24"><path d="m4.5 11 7.5-6.5L19.5 11v8h-5v-5h-5v5h-5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Home</span></a>
 <button class="toolbar-action focus-btn" id="focus-toggle" type="button" aria-pressed="false" aria-label="Enter focus mode" title="Focus mode (F)"></button>
@@ -435,7 +494,7 @@ th{text-transform:none!important;letter-spacing:.01em!important;font-size:10.5px
 <section class="page" id="start" aria-labelledby="start-title"><div class="eyebrow">A complete learning path · theory first</div>
 <div class="home-hero"><div><h1 id="start-title">Learn Transformers from first principles.<br>One idea at a time.</h1>
 <p class="opening">37 short lessons take you from dot products to <em>Attention Is All You Need</em>, and on to modern language models. Each lesson adds one idea, names the earlier lessons it uses, and ends with practice and answers.</p></div>
-<div class="actions" style="margin:0"><a class="button" id="continue-btn" href="#overview">Start with lesson 0.1 →</a><a class="button secondary" href="#readiness">Readiness check</a><a class="button quiet" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">The paper ↗</a></div></div>
+<div class="actions" style="margin:0"><a class="button" id="continue-btn" href="#overview">Start learning →</a><a class="button secondary" href="#readiness">Readiness check</a></div></div>
 <div class="stat-row"><div class="stat"><b>37</b><span>lessons, one idea each</span></div><div class="stat"><b>7</b><span>parts, from math to modern LLMs</span></div><div class="stat"><b>≈ 11 h</b><span>of focused study, with practice</span></div><div class="stat"><b id="home-progress">0 / 37</b><span>lessons understood</span></div></div>
 <div class="how-row"><div class="how"><strong>One new idea per lesson</strong>"Uses" chips show exactly which earlier lessons each one builds on.</div><div class="how"><strong>Work it, don't just read it</strong>Worked examples with real numbers, interactive diagrams and practice questions with answers.</div><div class="how"><strong>Check before moving on</strong>Checkpoints after Parts B, C and D mix new questions with older ones.</div></div>
 <section class="part-block" aria-labelledby="part-0"><div class="part-head"><span class="part-letter">0</span><h2 id="part-0">Orientation</h2><span class="part-desc">See the destination, check your starting point, keep the notation close.</span><span class="part-time">3 lessons · 25 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#overview" data-card="overview" data-code="0.1"><span class="lc-code">0.1</span><span><strong>The destination</strong><small>10 min</small></span></a></li><li><a class="lesson-card" href="#readiness" data-card="readiness" data-code="0.2"><span class="lc-code">0.2</span><span><strong>Readiness check</strong><small>10 min</small></span></a></li><li><a class="lesson-card" href="#glossary" data-card="glossary" data-code="0.3"><span class="lc-code">0.3</span><span><strong>Notation &amp; glossary</strong><small>5 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-A"><div class="part-head"><span class="part-letter">A</span><h2 id="part-A">Math you&#x27;ll actually use</h2><span class="part-desc">Five small tools attention is built from: dot products, matrices, softmax, derivatives, normalization.</span><span class="part-time">5 lessons · 90 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#dot" data-card="dot" data-code="A1"><span class="lc-code">A1</span><span><strong>Dot product as similarity</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#matrices" data-card="matrices" data-code="A2"><span class="lc-code">A2</span><span><strong>Matrices, shapes and transpose</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#softmax" data-card="softmax" data-code="A3"><span class="lc-code">A3</span><span><strong>Exponentials, logs and softmax</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#derivatives" data-card="derivatives" data-code="A4"><span class="lc-code">A4</span><span><strong>Derivatives and the chain rule</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#stats" data-card="stats" data-code="A5"><span class="lc-code">A5</span><span><strong>Mean, variance and normalization</strong><small>15 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-B"><div class="part-head"><span class="part-letter">B</span><h2 id="part-B">Neural networks</h2><span class="part-desc">How a network computes, measures its error and learns.</span><span class="part-time">5 lessons · 95 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#neuron" data-card="neuron" data-code="B1"><span class="lc-code">B1</span><span><strong>Neurons and layers</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#loss" data-card="loss" data-code="B2"><span class="lc-code">B2</span><span><strong>Loss functions</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#learning" data-card="learning" data-code="B3"><span class="lc-code">B3</span><span><strong>Gradient descent and backprop</strong><small>25 min</small></span></a></li><li><a class="lesson-card" href="#training" data-card="training" data-code="B4"><span class="lc-code">B4</span><span><strong>Training in practice</strong><small>20 min</small></span></a></li><li><a class="lesson-card check" href="#check-b" data-card="check-b" data-code="B5"><span class="lc-code">B5</span><span><strong>Checkpoint B</strong><small>Checkpoint · 15 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-C"><div class="part-head"><span class="part-letter">C</span><h2 id="part-C">Text and sequences</h2><span class="part-desc">Turn words into vectors, and see why older sequence models struggled.</span><span class="part-time">5 lessons · 70 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#tokens" data-card="tokens" data-code="C1"><span class="lc-code">C1</span><span><strong>Tokenization</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#embeddings" data-card="embeddings" data-code="C2"><span class="lc-code">C2</span><span><strong>Embeddings</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#rnn" data-card="rnn" data-code="C3"><span class="lc-code">C3</span><span><strong>RNNs and the bottleneck</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#early-attention" data-card="early-attention" data-code="C4"><span class="lc-code">C4</span><span><strong>Attention before Transformers</strong><small>15 min</small></span></a></li><li><a class="lesson-card check" href="#check-c" data-card="check-c" data-code="C5"><span class="lc-code">C5</span><span><strong>Checkpoint C</strong><small>Checkpoint · 10 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-D"><div class="part-head"><span class="part-letter">D</span><h2 id="part-D">Attention, one piece at a time</h2><span class="part-desc">Build scaled dot-product attention one ingredient at a time.</span><span class="part-time">8 lessons · 165 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#attention-idea" data-card="attention-idea" data-code="D1"><span class="lc-code">D1</span><span><strong>Attention as a weighted average</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#scores" data-card="scores" data-code="D2"><span class="lc-code">D2</span><span><strong>Scores to weights, by hand</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#qkv" data-card="qkv" data-code="D3"><span class="lc-code">D3</span><span><strong>Queries, keys and values</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#matrix-form" data-card="matrix-form" data-code="D4"><span class="lc-code">D4</span><span><strong>Matrix form and the √dₖ scale</strong><small>25 min</small></span></a></li><li><a class="lesson-card" href="#heads" data-card="heads" data-code="D5"><span class="lc-code">D5</span><span><strong>Multi-head attention</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#masks" data-card="masks" data-code="D6"><span class="lc-code">D6</span><span><strong>Padding and causal masks</strong><small>25 min</small></span></a></li><li><a class="lesson-card" href="#positions" data-card="positions" data-code="D7"><span class="lc-code">D7</span><span><strong>Positional encoding</strong><small>20 min</small></span></a></li><li><a class="lesson-card check" href="#check-d" data-card="check-d" data-code="D8"><span class="lc-code">D8</span><span><strong>Checkpoint D</strong><small>Checkpoint · 20 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-E"><div class="part-head"><span class="part-letter">E</span><h2 id="part-E">The Transformer</h2><span class="part-desc">Assemble the encoder, decoder and output layer, then see how the model trains and generates.</span><span class="part-time">8 lessons · 170 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#sublayers" data-card="sublayers" data-code="E1"><span class="lc-code">E1</span><span><strong>Feed-forward, residuals, layer norm</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#encoder" data-card="encoder" data-code="E2"><span class="lc-code">E2</span><span><strong>The encoder</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#decoder" data-card="decoder" data-code="E3"><span class="lc-code">E3</span><span><strong>The decoder and cross-attention</strong><small>25 min</small></span></a></li><li><a class="lesson-card" href="#output" data-card="output" data-code="E4"><span class="lc-code">E4</span><span><strong>The output layer</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#shapes" data-card="shapes" data-code="E5"><span class="lc-code">E5</span><span><strong>Full shape trace</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#train-transformer" data-card="train-transformer" data-code="E6"><span class="lc-code">E6</span><span><strong>How it&#x27;s trained</strong><small>25 min</small></span></a></li><li><a class="lesson-card" href="#generation" data-card="generation" data-code="E7"><span class="lc-code">E7</span><span><strong>How it generates text</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#paper" data-card="paper" data-code="E8"><span class="lc-code">E8</span><span><strong>Reading the paper</strong><small>30 min</small></span></a></li></ul></section><section class="part-block" aria-labelledby="part-G"><div class="part-head"><span class="part-letter">G</span><h2 id="part-G">After the paper</h2><span class="part-desc">How the 2017 design became BERT, GPT and today&#x27;s large language models.</span><span class="part-time">3 lessons · 50 min</span></div><ul class="lesson-grid"><li><a class="lesson-card" href="#families" data-card="families" data-code="G1"><span class="lc-code">G1</span><span><strong>BERT, GPT and T5</strong><small>15 min</small></span></a></li><li><a class="lesson-card" href="#modern" data-card="modern" data-code="G2"><span class="lc-code">G2</span><span><strong>What modern models changed</strong><small>20 min</small></span></a></li><li><a class="lesson-card" href="#pretraining" data-card="pretraining" data-code="G3"><span class="lc-code">G3</span><span><strong>Pretraining and fine-tuning</strong><small>15 min</small></span></a></li></ul></section></section>
@@ -1552,7 +1611,7 @@ th{text-transform:none!important;letter-spacing:.01em!important;font-size:10.5px
 <div class="task"><span class="lvl explain">Explain</span><p>Without notes: walk through Figure 1 of the paper box by box, giving the shape coming out of each box for a 3-token source and a 4-token target.</p><details><summary>What a complete answer covers</summary><p>Embedding + PE (3, 512) and (4, 512); encoder self-attention with (3, 3) weights per head; FFN with a (3, 2048) inside; memory (3, 512); masked decoder self-attention (4, 4); cross-attention (4, 3); FFN; linear → (4, 37000); softmax. Residual and Add &amp; Norm around every sublayer, and six blocks per stack.</p></details></div>
 <div class="task"><span class="lvl explain">Explain</span><p>Name three things the title "Attention Is All You Need" does <em>not</em> mean.</p><details><summary>Compare your explanation</summary><p>It doesn't mean the model has only attention (there are FFNs, embeddings, norms and residuals). It doesn't mean the paper invented attention (it dates from 2014). It doesn't mean output is produced all at once (generation is still token by token).</p></details></div>
 </div>
-<div class="actions"><a class="button" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Open the paper on arXiv ↗</a><a class="button secondary" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">The Illustrated Transformer ↗</a></div>
+<div class="actions"><a class="button" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">The Illustrated Transformer ↗</a></div>
 <div class="takeaways"><h2>Key takeaways</h2><ul><li>You can now explain every box in Figure 1 and compute what it does.</li><li>Read the paper in three passes: purpose, mechanism, evidence.</li><li>§4's table is C3's three problems, solved.</li></ul></div>
 <p class="bridge">Part E is done. Finally, Part G: how this design became today's models.</p>
 </section><section class="page" id="families" data-code="G1" data-part="G" data-nav="BERT, GPT and T5" data-min="15" data-uses="encoder,decoder,masks" aria-labelledby="families-title">
@@ -1669,8 +1728,8 @@ function updateProgress() {
   const cont = $("#continue-btn");
   if (cont) {
     const next = lessonIds.find(id => !completed.has(id));
-    if (!completed.size) { cont.href = "#" + lessonIds[0]; cont.textContent = "Start with lesson 0.1 →"; }
-    else if (next) { cont.href = "#" + next; cont.textContent = "Continue: " + codeOf(next) + " " + byId[next].dataset.nav + " →"; }
+    if (!completed.size) { cont.href = "#" + lessonIds[0]; cont.textContent = "Start learning →"; }
+    else if (next) { cont.href = "#" + next; cont.textContent = "Continue: " + byId[next].dataset.nav + " →"; }
     else { cont.href = "#" + lessonIds[0]; cont.textContent = "All done: review from the start →"; }
   }
 }
@@ -1681,12 +1740,14 @@ function route(focus) {
   active = pageIds.includes(hash) ? hash : "start";
   pages.forEach(p => { p.hidden = p.id !== active; });
   $$(".nav-link").forEach(a => { if (a.dataset.page === active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
-  const i = pageIds.indexOf(active), nextId = pageIds[i + 1];
+  const i = pageIds.indexOf(active), nextId = pageIds[i + 1], prevId = pageIds[i - 1];
   $("#lesson-footer").hidden = active === "start";
   $("#previous").href = "#" + pageIds[Math.max(0, i - 1)];
+  if (prevId && byId[prevId]) $("#previous").title = byId[prevId].dataset.nav; else $("#previous").removeAttribute("title");
   $("#next").href = "#" + (nextId || "start");
-  $("#next").textContent = nextId ? "Next: " + codeOf(nextId) + " →" : "Back to roadmap →";
-  document.title = (active === "start" ? "" : codeOf(active) + " · " + byId[active].dataset.nav + " · ") + "Transformer Room";
+  $("#next").textContent = nextId ? "Next lesson →" : "Back to roadmap →";
+  if (nextId && byId[nextId]) $("#next").title = byId[nextId].dataset.nav; else $("#next").removeAttribute("title");
+  document.title = (active === "start" ? "" : byId[active].dataset.nav + " · ") + "Learn Transformers";
   $("#crumb-current").textContent = active === "start" ? "Roadmap" : byId[active].querySelector("h1").textContent;
   updateProgress();
   if (focus) { $("#main").focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: "instant" }); }
@@ -1715,7 +1776,7 @@ themeBtn.addEventListener("click", () => setTheme(isDark() ? "light" : "dark", t
 /* ---------- reading settings + Display panel (ported from interview_prep/assets/portal.js) ---------- */
 const READING_KEY = "transformer-room.reading", FOCUS_KEY = "transformer-room.focus";
 const SIZES = ["xs", "s", "m", "l", "xl"], WIDTHS = ["default", "wide", "full"], ALIGNS = ["left", "justify"];
-const defaultSize = () => (matchMedia("(max-width: 860px)").matches ? "m" : "s");
+const defaultSize = () => "m";
 const inFocus = () => document.body.classList.contains("focus-mode");
 function readReading() {
   const raw = store(READING_KEY, {}) || {};
@@ -1850,11 +1911,125 @@ document.addEventListener("keydown", ev => {
   ev.preventDefault(); focusBtn.click();
 });
 
-/* ---------- sidebar: menu + full-text search ---------- */
+/* ---------- sidebar: menu + resizer + full-text search ---------- */
+const closeMobileNav = () => document.body.classList.remove("mobile-nav-open");
 $("#menu-button").addEventListener("click", () => {
   if (window.innerWidth <= 820) document.body.classList.toggle("mobile-nav-open");
   else document.body.classList.toggle("nav-collapsed");
 });
+const sidebarClose = $("#sidebar-close");
+if (sidebarClose) sidebarClose.addEventListener("click", closeMobileNav);
+const sidebarScrim = $("#sidebar-scrim");
+if (sidebarScrim) sidebarScrim.addEventListener("click", closeMobileNav);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && document.body.classList.contains("mobile-nav-open")) {
+    closeMobileNav();
+  }
+});
+
+(function initSidebarResizer() {
+  const resizer = $("#sidebar-resizer");
+  if (!resizer) return;
+  const MIN_W = 220;
+  const DEFAULT_W = 290;
+  const STORAGE_KEY = "transformer-room.sidebar-w";
+
+  function getMaxW() {
+    return Math.min(560, Math.floor(window.innerWidth * 0.55));
+  }
+
+  function setWidth(w, save) {
+    const maxW = getMaxW();
+    const clamped = Math.max(MIN_W, Math.min(maxW, Math.round(w)));
+    document.documentElement.style.setProperty("--sidebar-w", clamped + "px");
+    document.documentElement.style.setProperty("--sidebar-base", clamped + "px");
+    resizer.setAttribute("aria-valuenow", clamped);
+    if (save) {
+      try { localStorage.setItem(STORAGE_KEY, clamped); } catch(e) {}
+    }
+  }
+
+  function resetWidth() {
+    document.documentElement.style.removeProperty("--sidebar-w");
+    document.documentElement.style.removeProperty("--sidebar-base");
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    resizer.removeAttribute("aria-valuenow");
+  }
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && +saved >= MIN_W && +saved <= 600) {
+      setWidth(+saved, false);
+    }
+  } catch(e) {}
+
+  resizer.setAttribute("aria-valuemin", MIN_W);
+  resizer.setAttribute("aria-valuemax", 560);
+
+  let isDragging = false;
+  let startX = 0;
+  let startW = 0;
+
+  function onPointerDown(e) {
+    if (window.innerWidth <= 820 || document.body.classList.contains("nav-collapsed") || document.body.classList.contains("focus-mode")) return;
+    if (e.button !== 0) return;
+    isDragging = true;
+    startX = e.clientX;
+    const currentW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sidebar-w")) || DEFAULT_W;
+    startW = currentW;
+    document.body.classList.add("is-resizing");
+    resizer.classList.add("is-resizing");
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
+    e.preventDefault();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    const delta = e.clientX - startX;
+    setWidth(startW + delta, false);
+  }
+
+  function onPointerUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.classList.remove("is-resizing");
+    resizer.classList.remove("is-resizing");
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerup", onPointerUp);
+    window.removeEventListener("pointercancel", onPointerUp);
+    const delta = e.clientX - startX;
+    setWidth(startW + delta, true);
+  }
+
+  resizer.addEventListener("pointerdown", onPointerDown);
+
+  resizer.addEventListener("dblclick", () => {
+    resetWidth();
+  });
+
+  resizer.addEventListener("keydown", e => {
+    if (window.innerWidth <= 820) return;
+    const currentW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sidebar-w")) || DEFAULT_W;
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setWidth(currentW - 16, true);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setWidth(currentW + 16, true);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setWidth(MIN_W, true);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setWidth(getMaxW(), true);
+    } else if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      resetWidth();
+    }
+  });
+})();
 const pageText = new Map(pages.map(p => [p.id, (p.textContent || "").toLowerCase()]));
 $("#lesson-search").addEventListener("input", e => {
   const q = e.target.value.trim().toLowerCase();
@@ -2096,7 +2271,7 @@ $$("form.quiz").forEach(form => {
       $$(".opt", fs).forEach(o => { const v = $("input", o).value; if (v === ans) o.classList.add("is-right"); else if (sel && v === sel.value) o.classList.add("is-wrong"); });
       $(".why", fs).hidden = false;
     });
-    const link = id => `<a href="#${id}">${codeOf(id)} ${byId[id].dataset.nav}</a>`;
+    const link = id => `<a href="#${id}">${byId[id].dataset.nav}</a>`;
     if (form.dataset.quiz === "readiness") {
       const gaps = lessonIds.filter(id => missed.includes(id));
       result.innerHTML = gaps.length
